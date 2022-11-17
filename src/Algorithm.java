@@ -8,8 +8,10 @@ public class Algorithm {
         int min = Integer.MAX_VALUE;
         int min_index=0;
         for(int i=0; i<len; i+=1){
-            min = distance[i];
-            min_index = i;
+            if (visit[i] == false && distance[i]<min){
+                min = distance[i];
+                min_index = i;
+            }
         }
         return min_index;
     }
@@ -18,6 +20,8 @@ public class Algorithm {
 
     void name(int[][] graph, int start){
         len = graph.length;
+        int[] distance = new int[len];
+        this.distance = distance;
         boolean[] visit = new boolean[len];
 
         for (int i=0; i<len; i+=1) {
@@ -37,7 +41,12 @@ public class Algorithm {
                     distance[j] = distance[now] + graph[now][j];
                 }
             }
+        }
     }
+    void print(){
+        System.out.println("Index:    Distance:");
+        for(int i=0;i<len; i+=1){
+            System.out.println(i+"\t\t\t" + distance[i]);
+        }
     }
-
 }
